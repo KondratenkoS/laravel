@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\NameController;
+use App\Http\Controllers\SurnameNameController;
+use App\Http\Controllers\UserCityController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +17,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/* ROUTES AND CONTROLLERS */
+/* Сделайте так, чтобы при обращении на адрес /user вызывалось действие show контроллера UserController. */
+Route::get('/user', [UserController::class, 'show']);
 
+/* Сделайте так, чтобы при обращении на адрес /user/all вызывалось действие all контроллера UserController. */
+Route::get('/user/all', [UserController::class, 'all']);
+
+/* Сделайте маршрут, обрабатывающий адреса вида /users/:name. */
+Route::get('/users/{name}', [NameController::class, 'show']);
+
+/* Сделайте маршрут, обрабатывающий адреса вида /user/:surname/:name. */
+Route::get('/users/{surname}/{name}', [SurnameNameController::class, 'show']);
+
+/* Создайте маршрут, который параметром будет принимать имя юзера,
+а в браузером результатом отправлять его город. */
+Route::get('/username/{name}', [UserCityController::class, 'show']);
 
 /* ЗАДАЧКИ НА МАРШРУТЫ */
-
 /* тест сообщение */
 Route::get('/', function () {
     return 'Hello Hell!';
