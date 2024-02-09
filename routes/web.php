@@ -1,8 +1,22 @@
 <?php
 
+use App\Http\Controllers\ArrayInBladeController;
+use App\Http\Controllers\ComplexConditionsController;
+use App\Http\Controllers\ConditionsController;
+use App\Http\Controllers\DataTransferController;
+use App\Http\Controllers\ElseController;
+use App\Http\Controllers\ElseIfController;
+use App\Http\Controllers\ForeachBladeController;
+use App\Http\Controllers\IfForeachController;
 use App\Http\Controllers\NameController;
 use App\Http\Controllers\SurnameNameController;
+use App\Http\Controllers\TernaryOperatorController;
+use App\Http\Controllers\TestViewController;
+use App\Http\Controllers\UnescapedDataOutputController;
+use App\Http\Controllers\UnlessController;
 use App\Http\Controllers\UserCityController;
+use App\Http\Controllers\VariableOutputController;
+use App\Http\Controllers\VariablesToAttributesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -16,6 +30,61 @@ use App\Http\Controllers\UserController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+/* VIEWS AND BLADE*/
+/* Сделайте представление(hello.blade.php) для какого-нибудь действия одного из ваших контроллеров. */
+Route::get('/testview', [TestViewController::class, 'show']);
+
+/*  Пусть в действии контроллера даны переменные $name и $surname.
+    Передайте значения этих переменных в представление и выведите
+    содержимое каждой из этих переменных на экран. */
+Route::get('/datatransfer', [DataTransferController::class, 'dataTransfer']);
+
+/* Пусть в действии контроллера даны переменные $name, $age и $salary. Передайте значения этих переменных
+ в представление и выведите содержимое каждой из этих переменных в отдельном абзаце. */
+Route::get('/variable_output', [VariableOutputController::class, 'show']);
+
+/* Пусть в действии дана переменная, содержащая CSS класс. Передайте эту переменную в представление
+ и для какого-нибудь тега значением атрибута class укажите нашу переменную. */
+Route::get('/attr1', [VariablesToAttributesController::class, 'show1']);
+
+/* Пусть из действия в представление передаются данные работника в виде массива.
+Пусть в массиве будет ключ name, ключ age и ключ salary.
+Выведите каждый элемент массива в отдельном абзаце. */
+Route::get('/array_in_blade', [ArrayInBladeController::class, 'show']);
+
+/* Пусть из действия в представление передается переменная $city. Выведите в представлении названия города
+ из этой переменной. Если же город не передан - пусть по умолчанию выведется город 'Москва'. */
+Route::get('/ternary_operator', [TernaryOperatorController::class, 'show']);
+
+/* Выведите строку на экран так, чтобы теги выполнили свое действие (то есть чтобы в данном случае текст стал жирным). */
+Route::get('/unescaped-data-output', [UnescapedDataOutputController::class, 'show']);
+
+/* Пусть из действия в представление передается переменная, содержащая возраст пользователя.
+Покажите в представлении текст только для пользователей старше 18 лет. */
+Route::get('/conditions', [ConditionsController::class, 'show']);
+
+/* Выведите разный текст для пользователя старше и младше 18 лет. */
+Route::get('/else', [ElseController::class, 'show']);
+
+/* Выведите разный текст для пользователя старше, младше, и для тех, кому сейчас ровно 18 лет. */
+Route::get('/elseif', [ElseIfController::class, 'show']);
+
+/* Пусть из действия в представление передается возраст пользователя. Если возраст пользователь несовершеннолетний,
+то выведите сообщение об этом. Для решения задачи воспользуйтесь директивой @unless. */
+Route::get('/unless', [UnlessController::class, 'show']);
+
+/*Пусть из действия в представление передается массив с числами. Если количество элементов в этом массиве больше нуля,
+то выведите на экран сумму этих элементов, а если количество элементов равно нулю, то выведите сообщение об этом.*/
+Route::get('/complex-conditions', [ComplexConditionsController::class, 'show']);
+
+/*Передайте из действия в представление массив с числами. Выведите этот массив в виде списка ul.*/
+Route::get('/foreach', [ForeachBladeController::class, 'show']);
+
+/* Передайте из действия в представление массив с числами. Выведите этот массив в виде списка ul.
+Сделайте так, чтобы в список попадали только элементы, значениями которых служат четные числа. */
+Route::get('/if_foreach', [IfForeachController::class, 'show']);
+
 
 /* ROUTES AND CONTROLLERS */
 /* Сделайте так, чтобы при обращении на адрес /user вызывалось действие show контроллера UserController. */
@@ -33,6 +102,8 @@ Route::get('/users/{surname}/{name}', [SurnameNameController::class, 'show']);
 /* Создайте маршрут, который параметром будет принимать имя юзера,
 а в браузером результатом отправлять его город. */
 Route::get('/username/{name}', [UserCityController::class, 'show']);
+
+
 
 /* ЗАДАЧКИ НА МАРШРУТЫ */
 /* тест сообщение */
@@ -78,13 +149,13 @@ Route::get('/user/{name}/{id}', function ($name, $id) {
 })->where('id', '[0-9]+')->where('name', '[a-z].+');
 
 /* Сделайте маршрут вида /posts/:date, где вместо :date должна быть дата в формате год-месяц-день. */
-Route::get('/post/{date}', function ($date) {
+Route::get('/posts/{date}', function ($date) {
     return 'Дата - ' . $date;
 })->where('date', '\d{4}-\d{2}-\d{2}');
 
 /* Сделайте маршрут вида /:year/:month/:day, где вместо :year должен быть год,
  вместо :month - месяц, вместо :day - день. */
-Route::get('/post/{year}/{month}/{day}', function ($year, $month, $day) {
+Route::get('/posts/{year}/{month}/{day}', function ($year, $month, $day) {
     return 'Дата - ' . $year . '-' . $month . '-' . $day;
 })  ->where('year', '\d{4}')
     ->where('month', '\d{2}')
