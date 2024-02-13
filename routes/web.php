@@ -1,20 +1,29 @@
 <?php
 
 use App\Http\Controllers\ArrayInBladeController;
+use App\Http\Controllers\BreakDirectiveController;
 use App\Http\Controllers\ComplexConditionsController;
 use App\Http\Controllers\ConditionsController;
+use App\Http\Controllers\ContinueDirectiveController;
 use App\Http\Controllers\DataTransferController;
 use App\Http\Controllers\ElseController;
 use App\Http\Controllers\ElseIfController;
+use App\Http\Controllers\ForDirectiveController;
 use App\Http\Controllers\ForeachBladeController;
+use App\Http\Controllers\ForeachMultiArraysController;
+use App\Http\Controllers\ForeachNestedController;
+use App\Http\Controllers\ForelseDirectiveController;
 use App\Http\Controllers\IfForeachController;
 use App\Http\Controllers\NameController;
+use App\Http\Controllers\PhpCodeBlockController;
+use App\Http\Controllers\PracticumController;
 use App\Http\Controllers\SurnameNameController;
 use App\Http\Controllers\TernaryOperatorController;
 use App\Http\Controllers\TestViewController;
 use App\Http\Controllers\UnescapedDataOutputController;
 use App\Http\Controllers\UnlessController;
 use App\Http\Controllers\UserCityController;
+use App\Http\Controllers\VariableLoopController;
 use App\Http\Controllers\VariableOutputController;
 use App\Http\Controllers\VariablesToAttributesController;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +39,11 @@ use App\Http\Controllers\UserController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+/* COLLECTION */
+Route::get('/collection', );
+
+
 
 /* VIEWS AND BLADE*/
 /* Сделайте представление(hello.blade.php) для какого-нибудь действия одного из ваших контроллеров. */
@@ -84,6 +98,57 @@ Route::get('/foreach', [ForeachBladeController::class, 'show']);
 /* Передайте из действия в представление массив с числами. Выведите этот массив в виде списка ul.
 Сделайте так, чтобы в список попадали только элементы, значениями которых служат четные числа. */
 Route::get('/if_foreach', [IfForeachController::class, 'show']);
+
+/* Передайте из действия в представление двухмерный массив с числами. Выведите его в виде HTML таблицы. */
+Route::get('/foreach_nested', [ForeachNestedController::class, 'show']);
+
+/* Передайте из действия в представление массив с работниками, выведите массив в виде списка и HTML таблицы */
+Route::get('/foreach_multi_arrays', [ForeachMultiArraysController::class, 'show']);
+
+/* Дан массив с именами юзеров. Если в массиве есть элементы, то выведите каждый элемент в своем абзаце.
+Если элементов нет, выведите сообщение об этом. */
+Route::get('/forelse_directive', [ForelseDirectiveController::class, 'show']);
+
+/* Задачи на переменную - $loop */
+Route::get('/variable_loop', [VariableLoopController::class, 'show']);
+
+/* Дан массив с числами. Переберите этот массив циклом до первого нулевого элемента. */
+Route::get('/break_directive', [BreakDirectiveController::class, 'show']);
+
+/* Дан массив с числами. Выведите эти числа в виде списка ul. При выводе пропускайте нулевые элементы. */
+Route::get('/continue_directive', [ContinueDirectiveController::class, 'show']);
+
+/* С помощью цикла @for выведите 10 абзацев, заполненных числами от 1 до 10. */
+Route::get('/for_directive', [ForDirectiveController::class, 'show']);
+
+/* Вставка блока кода с php */
+Route::get('/php_code_block', [PhpCodeBlockController::class, 'show']);
+
+/* ПРАКТИКА НА BLADE */
+/* Сосдаём ссылку */
+Route::get('/href', [PracticumController::class, 'href']);
+
+/* Выводим работников */
+Route::get('/employees', [PracticumController::class, 'employees']);
+
+/* Статусы работников */
+Route::get('/banned', [PracticumController::class, 'banned']);
+
+/* Из действия в представление передается массив со строками. Переберите этот массив циклом и в каждой итерации
+    цикла создайте инпут, сделав значением инпута элемент массива. */
+Route::get('/input', [PracticumController::class, 'input']);
+
+/* Сделайте в действии контроллера массив с числами от 1 до последнего дня текущего месяца.
+    Передайте этот массив в представление. Сделайте также переменную, в которой будет хранится номер текущего дня.
+    Также передайте эту переменную в представление.
+
+    Переберите циклом переданный массив и выведите его в виде списка ul. При этом тегу li,
+    в котором хранится номер текущего дня месяца добавьте класс active. */
+Route::get('/days_of_month', [PracticumController::class, 'days_of_month']);
+
+
+
+
 
 
 /* ROUTES AND CONTROLLERS */
