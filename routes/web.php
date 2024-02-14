@@ -20,6 +20,7 @@ use App\Http\Controllers\PracticumController;
 use App\Http\Controllers\SurnameNameController;
 use App\Http\Controllers\TernaryOperatorController;
 use App\Http\Controllers\TestViewController;
+use App\Http\Controllers\TryCollectionController;
 use App\Http\Controllers\UnescapedDataOutputController;
 use App\Http\Controllers\UnlessController;
 use App\Http\Controllers\UserCityController;
@@ -40,8 +41,7 @@ use App\Http\Controllers\UserController;
 |
 */
 
-/* COLLECTION */
-Route::get('/collection', );
+
 
 
 
