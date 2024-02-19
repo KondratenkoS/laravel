@@ -3,7 +3,9 @@
 use App\Http\Controllers\ArrayInBladeController;
 use App\Http\Controllers\BreakDirectiveController;
 use App\Http\Controllers\ComplexConditionsController;
+use App\Http\Controllers\ConditionOrWhereController;
 use App\Http\Controllers\ConditionsController;
+use App\Http\Controllers\ConditionWhereController;
 use App\Http\Controllers\ContinueDirectiveController;
 use App\Http\Controllers\DataTransferController;
 use App\Http\Controllers\ElseController;
@@ -16,14 +18,17 @@ use App\Http\Controllers\ForelseDirectiveController;
 use App\Http\Controllers\IfForeachController;
 use App\Http\Controllers\NameController;
 use App\Http\Controllers\PhpCodeBlockController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\PracticumController;
+use App\Http\Controllers\SelectionFieldsController;
+use App\Http\Controllers\SeveralConditionsWhereController;
 use App\Http\Controllers\SurnameNameController;
 use App\Http\Controllers\TernaryOperatorController;
 use App\Http\Controllers\TestViewController;
-use App\Http\Controllers\TryCollectionController;
 use App\Http\Controllers\UnescapedDataOutputController;
 use App\Http\Controllers\UnlessController;
 use App\Http\Controllers\UserCityController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VariableLoopController;
 use App\Http\Controllers\VariableOutputController;
 use App\Http\Controllers\VariablesToAttributesController;
@@ -41,7 +46,30 @@ use App\Http\Controllers\UserController;
 |
 */
 
+/* QUERY BUILDER */
+/* Подключите фасад DB к контроллеру юзеров и постов */
+Route::get('/post_QB', [PostController::class, 'show']);
+Route::get('/users_QB', [UsersController::class, 'show']);
 
+/* При получении данных из таблицы с юзерами оставьте в выборке только поля name и email. */
+/* При получении данных из таблицы с юзерами переименуйте поле email на user_email. */
+Route::get('selection_fields_QB', [SelectionFieldsController::class, 'show']);
+
+/* Получите всех юзеров с возрастом, равным 30 лет. */
+/* Получите всех юзеров с возрастом, не равным 30 лет. */
+/* Получите всех юзеров с возрастом, больше 30 лет */
+/* Получите всех юзеров с возрастом, меньше 30 лет. */
+/* Получите всех юзеров с возрастом, меньшим или равным 30 лет. */
+Route::get('/condition_where_QB', [ConditionWhereController::class, 'show']);
+
+/* Получите всех юзеров с возрастом от 20 до 30 лет. */
+Route::get('/several_conditions_where_QB', [SeveralConditionsWhereController::class, 'show']);
+
+/* Получите всех юзеров с возрастом 30 или id, большем 4. */
+/* Получите всех юзеров с возрастом 30, или зарплатой 500, или id, большем 4, */
+/* Получите юзеров, у которых зарплата равна 500 либо возраст от 20 до 30. */
+/* Получите юзеров, у которых возраст от 20 до 30, либо зарплата от 400 до 800. */
+Route::get('/condition_orWhere', [ConditionOrWhereController::class, 'show']);
 
 
 
