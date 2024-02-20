@@ -5,9 +5,14 @@ use App\Http\Controllers\BreakDirectiveController;
 use App\Http\Controllers\ComplexConditionsController;
 use App\Http\Controllers\ConditionOrWhereController;
 use App\Http\Controllers\ConditionsController;
+use App\Http\Controllers\ConditionWhereBetweenController;
 use App\Http\Controllers\ConditionWhereController;
+use App\Http\Controllers\ConditionWhereInController;
 use App\Http\Controllers\ContinueDirectiveController;
+use App\Http\Controllers\DataSortingController;
 use App\Http\Controllers\DataTransferController;
+use App\Http\Controllers\DynamicConditionsCombinationsController;
+use App\Http\Controllers\DynamicConditionsController;
 use App\Http\Controllers\ElseController;
 use App\Http\Controllers\ElseIfController;
 use App\Http\Controllers\ForDirectiveController;
@@ -15,13 +20,21 @@ use App\Http\Controllers\ForeachBladeController;
 use App\Http\Controllers\ForeachMultiArraysController;
 use App\Http\Controllers\ForeachNestedController;
 use App\Http\Controllers\ForelseDirectiveController;
+use App\Http\Controllers\GettingColumnCollectionController;
+use App\Http\Controllers\GettingColumnValueController;
+use App\Http\Controllers\GettingOneRowController;
 use App\Http\Controllers\IfForeachController;
 use App\Http\Controllers\NameController;
+use App\Http\Controllers\NullCheckingController;
 use App\Http\Controllers\PhpCodeBlockController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PracticumController;
+use App\Http\Controllers\RandomSortingController;
+use App\Http\Controllers\RowsAmountController;
 use App\Http\Controllers\SelectionFieldsController;
+use App\Http\Controllers\SelectionOffsetController;
 use App\Http\Controllers\SeveralConditionsWhereController;
+use App\Http\Controllers\SortingByDateController;
 use App\Http\Controllers\SurnameNameController;
 use App\Http\Controllers\TernaryOperatorController;
 use App\Http\Controllers\TestViewController;
@@ -70,6 +83,65 @@ Route::get('/several_conditions_where_QB', [SeveralConditionsWhereController::cl
 /* Получите юзеров, у которых зарплата равна 500 либо возраст от 20 до 30. */
 /* Получите юзеров, у которых возраст от 20 до 30, либо зарплата от 400 до 800. */
 Route::get('/condition_orWhere', [ConditionOrWhereController::class, 'show']);
+
+/* Получите юзера с id, равным 3. */
+/* Передайте в представление юзера, полученного в предыдущей задаче.
+Выведите его имя, возраст и email в отдельных абзацах. */
+Route::get('/getting_one_row', [GettingOneRowController::class, 'show']);
+
+/* Получите email юзера с id, равным 3. */
+/* Передайте в представление email, полученный в предыдущей задаче. Выведите его в абзаце. */
+Route::get('/getting_column_value', [GettingColumnValueController::class, 'show']);
+
+/* Получите коллекцию имен всех юзеров. */
+/* Передайте в представление коллекцию юзеров, полученную в предыдущей задаче.
+Выведите эти данные в виде списка ul. */
+Route::get('/getting_column_collection', [GettingColumnCollectionController::class, 'show']);
+
+/* Получите юзеров, возраст которых находится в промежутке от 30 до 40. */
+/* Получите юзеров, возраст которых находится НЕ в промежутке от 30 до 40. */
+Route::get('/condition_whereBetween', [ConditionWhereBetweenController::class, 'show']);
+
+/* Получите юзеров с id, равными 1, 2, 3 и 5. */
+/* Получите юзеров с id, НЕ равными 1, 2, 3 и 5. */
+Route::get('/condition_whereIn', [ConditionWhereInController::class, 'show']);
+
+/* Проверьте оба изученных метода на каком-нибудь поле таблицы с юзерами. */
+Route::get('/null_checking', [NullCheckingController::class, 'show']);
+
+/* Получите юзера с полем id, равным 3. */
+/* Получите юзера с полем name, равным 'john'. */
+/* Получите юзера с полем email, равным 'john@mail.com'. */
+Route::get('/dynamic_conditions', [DynamicConditionsController::class, 'show']);
+
+/* Получите юзера с полем id, равным 3, И полем age, равным 53 */
+/* Получите юзера с полем id, равным 3, ИЛИ полем age, равным 20. */
+Route::get('/dynamic_conditions_combinations', [DynamicConditionsCombinationsController::class, 'show']);
+
+/* Получите всех юзеров и отсортируйте их по возрастанию возраста. */
+/* Получите всех юзеров и отсортируйте их по убыванию зарплаты. */
+Route::get('/data_sorting', [DataSortingController::class, 'show']);
+
+/* Получите всех юзеров и отсортируйте их по возрастанию поля created_at. */
+/* Получите всех юзеров и отсортируйте их по убыванию поля created_at. */
+/* Получите юзеров с возрастом больше 30 и отсортируйте их по возрастанию поля created_at. */
+Route::get('/sorting_by_date', [SortingByDateController::class, 'show']);
+
+/* Получите всех юзеров, отсортированных в случайном порядке. */
+/* Получите одного случайного юзера. */
+/* Получите всех юзеров с возрастом от 20 до 30, отсортированных в случайном порядке. */
+/* Получите одного случайного юзера с возрастом от 20 до 30. */
+Route::get('/random_sorting', [RandomSortingController::class, 'show']);
+
+/* Получите первых 3 юзера. */
+/* Получите первых 3 юзера с возрастом, равным 30. */
+Route::get('/rows_amount', [RowsAmountController::class, 'show']);
+
+/* Получите 10 юзеров, начиная с пятого. */
+/* Получите 10 юзеров с возрастом 30, начиная с третьего. */
+Route::get('/selection_offset', [SelectionOffsetController::class, 'show']);
+
+
 
 
 
