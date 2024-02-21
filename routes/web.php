@@ -24,6 +24,13 @@ use App\Http\Controllers\GettingColumnCollectionController;
 use App\Http\Controllers\GettingColumnValueController;
 use App\Http\Controllers\GettingOneRowController;
 use App\Http\Controllers\IfForeachController;
+use App\Http\Controllers\models\GettingOneRecordByIdController;
+use App\Http\Controllers\models\GettingOneRecordController;
+use App\Http\Controllers\models\ModelsQueryBuilderController;
+use App\Http\Controllers\models\RecordsChangingController;
+use App\Http\Controllers\models\RecordsCreatingController;
+use App\Http\Controllers\models\RecordsRemovingController;
+use App\Http\Controllers\models\UserController;
 use App\Http\Controllers\NameController;
 use App\Http\Controllers\NullCheckingController;
 use App\Http\Controllers\PhpCodeBlockController;
@@ -46,7 +53,6 @@ use App\Http\Controllers\VariableLoopController;
 use App\Http\Controllers\VariableOutputController;
 use App\Http\Controllers\VariablesToAttributesController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +64,36 @@ use App\Http\Controllers\UserController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+/* ELOQUENT MODELS */
+/* Подключите модель Users к вашему контроллеру. */
+Route::get('/users', [UserController::class, 'show']);
+
+/* Получите всех юзеров с возрастом 30. */
+/* Получите всех юзеров с зарплатой от 100 до 300. */
+/* Получите всех юзеров, начиная с четвертого. */
+/* Получите всех юзеров, начиная с четвертого, 5 штук. */
+/* Получите всех юзеров с id, равным 1, 3, 4 или 5. */
+Route::get('/models_query_builder', [ModelsQueryBuilderController::class, 'show']);
+
+/* Получите юзера с возрастом 30. Передайте его в представление. Выведите данные этого юзера в отдельных тегах. */
+Route::get('/getting_one_record', [GettingOneRecordController::class, 'show']);
+
+/* Получите юзера с id, равным 3. Передайте его в представление. Выведите данные этого юзера в отдельных тегах. */
+/* Получите юзеров с id, равными 3, 4 и 5. */
+Route::get('/getting_one_record_by_id', [GettingOneRecordByIdController::class, 'show']);
+
+/* Добавьте нового юзера в вашу базу данных. */
+Route::get('/records_creating', [RecordsCreatingController::class, 'show']);
+
+/* Измените какого-нибудь юзера в вашей базе данных. */
+Route::get('/change_model', [RecordsChangingController::class, 'change_model']);
+
+/* Удалите из таблицы с юзерами всех юзеров с возрастом больше 30 лет. */
+Route::get('/remove_user', [RecordsRemovingController::class, 'remove_user']);
+
+
+
+
 
 /* QUERY BUILDER */
 /* Подключите фасад DB к контроллеру юзеров и постов */
