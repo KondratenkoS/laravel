@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Profile;
 use Database\Seeders\UsersSeeders;
 use Database\Seeders\PostsSeeders;
+use Database\Seeders\ProfilesSeeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -20,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersSeeders::class,
             PostsSeeders::class,
+            ProfilesSeeders::class,
         ]);
 
 //         \App\Models\User::factory(10)->create();

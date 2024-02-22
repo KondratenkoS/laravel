@@ -37,6 +37,9 @@ use App\Http\Controllers\PhpCodeBlockController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PracticumController;
 use App\Http\Controllers\RandomSortingController;
+use App\Http\Controllers\relationships\GettingDataOneToManyController;
+use App\Http\Controllers\relationships\InverseOneToOneController;
+use App\Http\Controllers\relationships\OneToOneLoopController;
 use App\Http\Controllers\RowsAmountController;
 use App\Http\Controllers\SelectionFieldsController;
 use App\Http\Controllers\SelectionOffsetController;
@@ -64,6 +67,53 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+/* RELATIONSHIPS AND ELOQUENT */
+/* Получите какого-нибудь юзера вместе с его профилем. */
+/* Отправьте полученного юзера в представление и выведите его данные в разных тегах. */
+Route::get('/getting_data_one_to_one', [\App\Http\Controllers\relationships\UserController::class, 'show']);
+
+/* Получите всех пользователей вместе с их профилями,
+передайте их в представление и выведите на экран в виде HTML таблицы. */
+Route::get('/one_to_one_loop', [OneToOneLoopController::class, 'show']);
+
+/* Свяжите таблицы с юзерами и профилями отношением belongsTo. */
+/* Получите профиль вместе с его юзером. */
+/* Получите все профили вместе с их юзерами. Выведите их в представлении в виде HTML таблицы */
+Route::get('/inverse_one_to_one', [InverseOneToOneController::class, 'show']);
+
+/* Для таблиц, созданных в предыдущем уроке получите все страны вместе с их городами. */
+/* Передайте полученные данные в представление и выведите их в виде следующей верстки:
+    <div>
+	<h2>country1</h2>
+	<ul>
+		<li>city11</li>
+		<li>city12</li>
+		<li>city13</li>
+	</ul>
+</div>
+<div>
+	<h2>country2</h2>
+	<ul>
+		<li>city21</li>
+		<li>city22</li>
+		<li>city23</li>
+	</ul>
+</div>
+<div>
+	<h2>country3</h2>
+	<ul>
+		<li>city31</li>
+		<li>city32</li>
+		<li>city33</li>
+	</ul>
+</div>
+ */
+Route::get('/getting_data_one_to_many', [GettingDataOneToManyController::class, 'show']);
+
+
+
+
+
 /* ELOQUENT MODELS */
 /* Подключите модель Users к вашему контроллеру. */
 Route::get('/users', [UserController::class, 'show']);
