@@ -37,6 +37,7 @@ use App\Http\Controllers\PhpCodeBlockController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PracticumController;
 use App\Http\Controllers\RandomSortingController;
+use App\Http\Controllers\relationships\ConditionsOneToManyController;
 use App\Http\Controllers\relationships\GettingDataOneToManyController;
 use App\Http\Controllers\relationships\InverseOneToOneController;
 use App\Http\Controllers\relationships\OneToOneLoopController;
@@ -109,6 +110,11 @@ Route::get('/inverse_one_to_one', [InverseOneToOneController::class, 'show']);
 </div>
  */
 Route::get('/getting_data_one_to_many', [GettingDataOneToManyController::class, 'show']);
+
+/* Свяжите таблицу countries с таблицей cities отношением hasMany. */
+/* Получите все страны вместе с их городами, население в которых больше 100 тысяч. */
+/* Получите все страны вместе с их городами. Города каждой страны отсортируйте по возрастанию населения. */
+Route::get('/conditions_one_to_many', [ConditionsOneToManyController::class, 'show']);
 
 
 
