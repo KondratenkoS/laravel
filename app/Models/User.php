@@ -11,6 +11,8 @@ class User extends Model
 {
     use HasFactory;
 
+    protected $guarded = false;
+
     public function profile(): HasOne
     {
         return $this->hasOne(Profile::class);

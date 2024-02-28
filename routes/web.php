@@ -20,6 +20,7 @@ use App\Http\Controllers\ForeachBladeController;
 use App\Http\Controllers\ForeachMultiArraysController;
 use App\Http\Controllers\ForeachNestedController;
 use App\Http\Controllers\ForelseDirectiveController;
+use App\Http\Controllers\form\SubmittingMethodPostController;
 use App\Http\Controllers\GettingColumnCollectionController;
 use App\Http\Controllers\GettingColumnValueController;
 use App\Http\Controllers\GettingOneRowController;
@@ -68,6 +69,22 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+/* REQUEST AND FORMS */
+/* Внедрите объект запроса в действие вашего контроллера. */
+//Route::get('/object_request/form', [\App\Http\Controllers\form\UserController::class, 'show_form'])->name('form');
+//Route::get('/object_request/result', [\App\Http\Controllers\form\UserController::class, 'result'])->name('result');
+
+/* Сделайте форму, которая будет спрашивать имя, возраст и зарплату юзера. Отправьте эту форму методом POST. */
+Route::get('/submitting_method_post/show', [SubmittingMethodPostController::class, 'show'])->name('show');
+Route::post('/submitting_method_post/result', [SubmittingMethodPostController::class, 'result'])->name('result');
+
+
+
+
+
+
+
 /* RELATIONSHIPS AND ELOQUENT */
 /* Получите какого-нибудь юзера вместе с его профилем. */
 /* Отправьте полученного юзера в представление и выведите его данные в разных тегах. */
@@ -115,6 +132,8 @@ Route::get('/getting_data_one_to_many', [GettingDataOneToManyController::class, 
 /* Получите все страны вместе с их городами, население в которых больше 100 тысяч. */
 /* Получите все страны вместе с их городами. Города каждой страны отсортируйте по возрастанию населения. */
 Route::get('/conditions_one_to_many', [ConditionsOneToManyController::class, 'show']);
+Route::get('/conditions_one_to_many/create', [ConditionsOneToManyController::class, 'create']);
+
 
 
 

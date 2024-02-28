@@ -12,9 +12,13 @@
     <title>Document</title>
 </head>
 <body>
-
-    @foreach($countries as $cities)
-        {{ $cities->name }}
-    @endforeach
+    <div>
+        <p><b>Введенное имя - {{ $result['name'] }}</b></p>
+        <p><b>Введенное фамилия - {{ $result['surname'] }}</b></p>
+        <p><b>Введенное зарплата - {{ $result['salary'] }}</b></p>
+        <p>
+            <a href="{{ route('show') }}"><b>Back</b></a>
+        </p>
+    </div>
 </body>
 </html>
