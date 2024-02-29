@@ -20,6 +20,11 @@ use App\Http\Controllers\ForeachBladeController;
 use App\Http\Controllers\ForeachMultiArraysController;
 use App\Http\Controllers\ForeachNestedController;
 use App\Http\Controllers\ForelseDirectiveController;
+use App\Http\Controllers\form\DependencyInjectionRouteParametersController;
+use App\Http\Controllers\form\ExcludingPartDataController;
+use App\Http\Controllers\form\GettingPartDataController;
+use App\Http\Controllers\form\HandlingOneActionController;
+use App\Http\Controllers\form\RequestAllController;
 use App\Http\Controllers\form\SubmittingMethodPostController;
 use App\Http\Controllers\GettingColumnCollectionController;
 use App\Http\Controllers\GettingColumnValueController;
@@ -79,6 +84,25 @@ use Illuminate\Support\Facades\Route;
 Route::get('/submitting_method_post/show', [SubmittingMethodPostController::class, 'show'])->name('show');
 Route::post('/submitting_method_post/result', [SubmittingMethodPostController::class, 'result'])->name('result');
 
+/* С помощью формы спросите у пользователя его город и страну.
+После отправки формы выведите эти данные над формой в отдельном абзаце. */
+Route::match(['get', 'post'], '/handling_one_action', [HandlingOneActionController::class, 'form']);
+
+/* Пусть в вашей форме есть произвольное количество инпутов. После отправки формы получите
+массив отправленных значений, отправьте его в представление и выведите эти данные в виде списка ul. */
+Route::match(['get', 'post'], '/request_all', [RequestAllController::class, 'form']);
+
+/* С помощью формы спросите у пользователя его имя, фамилию, email, логин, пароль.
+Получите массив, содержащий имя и логин пользователя. */
+Route::match(['get', 'post'], '/getting_part_data', [GettingPartDataController::class, 'form']);
+
+/* С помощью формы спросите у пользователя его имя, фамилию, email, логин, пароль.
+После отправки формы выведите на экран в виде списка ul все отправленные поля, кроме поля с паролем и email. */
+Route::match(['get', 'post'], '/excluding_part_data', [ExcludingPartDataController::class, 'exclude']);
+
+/*  */
+Route::match(['get', 'post'], '/dependency_injection_route_parameters/{id}/{login}',
+    [DependencyInjectionRouteParametersController::class, 'show']);
 
 
 
