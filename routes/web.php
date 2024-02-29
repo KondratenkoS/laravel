@@ -108,6 +108,12 @@ Route::match(['get', 'post'], '/dependency_injection_route_parameters/{id}/{logi
 
 
 
+/* PAGINATION */
+Route::get('/pagination', [\App\Http\Controllers\pagination\UserController::class, 'show']);
+
+
+
+
 
 /* RELATIONSHIPS AND ELOQUENT */
 /* Получите какого-нибудь юзера вместе с его профилем. */
