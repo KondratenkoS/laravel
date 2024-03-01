@@ -41,6 +41,9 @@ use App\Http\Controllers\NameController;
 use App\Http\Controllers\NullCheckingController;
 use App\Http\Controllers\PhpCodeBlockController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\practice\DeleteController;
+use App\Http\Controllers\practice\EditController;
+use App\Http\Controllers\practice\UserAddController;
 use App\Http\Controllers\PracticumController;
 use App\Http\Controllers\RandomSortingController;
 use App\Http\Controllers\relationships\ConditionsOneToManyController;
@@ -74,6 +77,17 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+/* CRUD PRACTICE */
+/* Выведите юзеров в виде HTML таблицы. */
+Route::get('/practice/show', [\App\Http\Controllers\practice\UserController::class, 'show']);
+Route::get('/practice/delete{id}', [DeleteController::class, 'delete']);
+Route::match(['get', 'post'], '/practice/edit{id}', [EditController::class, 'edit']);
+Route::match(['get', 'post'], '/practice/add_user', [UserAddController::class, 'show_form']);
+
+
+
+
 
 /* REQUEST AND FORMS */
 /* Внедрите объект запроса в действие вашего контроллера. */

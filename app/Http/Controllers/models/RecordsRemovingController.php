@@ -8,8 +8,12 @@ use App\Models\User;
 
 class RecordsRemovingController extends Controller
 {
-    public function remove_user():void
+    public function remove_user()
     {
         $users = User::where('age', '=', 30)->delete();
+
+        return view('practice.delete', [
+
+        ]);
     }
 }
