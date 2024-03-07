@@ -78,6 +78,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/* REDIRECTS */
+/*  */
+Route::get('/redirects/what_num', [\App\Http\Controllers\redirect\UserController::class, 'choose_num']);
+Route::get('/redirects/result', [\App\Http\Controllers\redirect\UserController::class, 'result']);
+
+
+
+
+
 /* SESSIONS */
 /* Получите в своем контроллере объект с сессией. */
 /* В одном действии контроллера установите какое-нибудь значение в сессию, а во втором - получите его. */
@@ -85,7 +94,6 @@ use Illuminate\Support\Facades\Route;
 /* Запишите в сессию время первого захода пользователя на страницу.
     При обновлении страницы (и при первом заходе тоже) выводите это время на экран. */
 /* Удалите какую-нибудь переменную из сессии. */
-/*  */
 Route::get('/sessions', [\App\Http\Controllers\sessions\UserController::class, 'index']);
 
 
