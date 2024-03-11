@@ -79,6 +79,32 @@ use Illuminate\Support\Facades\Route;
 */
 
 /* REDIRECTS */
+/* В одном действии контроллера установите куку, а в другом - прочитайте ее. */
+/* Реализуйте счетчик обновления страницы, работающий на куки. */
+Route::get('/cookie', [\App\Http\Controllers\cookie\UserController::class, 'get_cookie']);
+
+
+
+
+
+
+
+/* Отдайте в качестве ответа статус 201 и некоторый текст. */
+/* Отдайте в качестве ответа статус 404 и некоторый текст. */
+Route::get('/response/201', [\App\Http\Controllers\responses\UserController::class, 'error']);
+
+
+
+
+
+
+/* Сделайте отдельную страницу с формой для добавления юзера. */
+/* После сохранения юзера выполните редирект на страницу со списком юзеров. */
+Route::get('/redirects/all_users', [\App\Http\Controllers\redirect\controller_action\UserController::class, 'all_users'])
+    ->name('all');
+Route::match(['get', 'post'], '/redirects/add_user', [\App\Http\Controllers\redirect\controller_action\UserController::class, 'add_user']);
+
+
 /*  */
 Route::get('/redirects/what_num', [\App\Http\Controllers\redirect\UserController::class, 'choose_num']);
 Route::get('/redirects/result', [\App\Http\Controllers\redirect\UserController::class, 'result']);
